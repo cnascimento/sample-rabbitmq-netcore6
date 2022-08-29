@@ -11,6 +11,23 @@ services:
     ports:
     - "1434:1433"
 
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+    - 15672:15672
+    - 5672:5672
+
+  # console:
+  #   container_name: rabbitmqproductconsoleapp
+  #   image: rabbitmqproductconsoleapp
+  #   build:
+  #     context: .
+  #     dockerfile: RabbitMQProduct.ConsoleApplication/Dockerfile
+  #   depends_on:
+  #   - mssql
+  #   - rabbitmq
+
   app:
     container_name: rabbitmqproductapi
     image: rabbitmqproductapi
@@ -29,3 +46,4 @@ services:
     - ~/.aspnet/https:/https:ro
     depends_on:
     - mssql
+    - rabbitmq

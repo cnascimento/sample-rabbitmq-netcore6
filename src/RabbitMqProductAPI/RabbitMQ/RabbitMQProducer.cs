@@ -11,7 +11,7 @@ namespace RabbitMqProductAPI.RabbitMQ
             //Here we specify the Rabbit MQ Server. we use rabbitmq docker image and use it
             var factory = new ConnectionFactory
             {
-                HostName = "localhost"
+                HostName = "rabbitmq"
             };
 
             //Create the RabbitMQ connection using connection factory details as i mentioned above
