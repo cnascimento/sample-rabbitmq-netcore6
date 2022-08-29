@@ -5,13 +5,11 @@ services:
     container_name: mssql
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_PID=Developer
-      - MSSQL_SA_PASSWORD=teste#123
+    - ACCEPT_EULA=Y
+    - MSSQL_PID=Developer
+    - MSSQL_SA_PASSWORD=teste#123
     ports:
-      - "1434:1433"
-    networks:
-      - ssl-network
+    - "1434:1433"
 
   app:
     container_name: rabbitmqproductapi
@@ -20,20 +18,14 @@ services:
       context: .
       dockerfile: RabbitMqProductAPI/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=102030xyz
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_URLS=https://+:443;http://+:80
+    - ASPNETCORE_Kestrel__Certificates__Default__Password=102030xyz
+    - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
     ports:
-      - "5101:80"
-      - "6101:443"
+    - "5101:80"
+    - "6101:443"
     volumes:
-      - ~/.aspnet/https:/https:ro
+    - ~/.aspnet/https:/https:ro
     depends_on:
-      - mssql
-    networks:
-      - ssl-network
-
-networks:
-  ssl-network:
-    driver: bridge
+    - mssql

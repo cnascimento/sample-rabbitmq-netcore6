@@ -16,6 +16,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Executa o migrations ao levantar a aplicação
+app.MigrateDatabase();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
